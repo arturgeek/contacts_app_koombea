@@ -18,14 +18,13 @@
           <th class="px-4 py-3">State</th>
           <th class="px-4 py-3">Creation Date</th>
         </tr>
-        
+        @foreach ($files as $file)
         <tr class="bg-gray-100 border-b border-gray-200">
-            @foreach ($files as $file)
-                <td class="px-4 py-3">{{ $file->file_name }}</td>
-                <td class="px-4 py-3">{{ date('Y m d', strtotime($file->created_at)) }}</td>
-                <td class="px-4 py-3">{{ $file->state }}</td>
-            @endforeach
+            <td class="px-4 py-3">{{ $file->file_name }}</td>
+            <td class="px-4 py-3">{{ date('Y m d', strtotime($file->created_at)) }}</td>
+            <td class="px-4 py-3">{{ $file->state }}</td>
         </tr> 
+        @endforeach
     </table>
     @endif
 

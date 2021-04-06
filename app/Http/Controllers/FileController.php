@@ -39,7 +39,8 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        $path = $request->file('contacts_file')->store('files');
+        $file = $request->file('contacts_file');
+        $path = $file->store('contacts_files', ['disk' => 'public']);
 
         $file = new File;
         $file->user_id = Auth::id();
