@@ -1,6 +1,13 @@
 var fileInput = null;
 var fileContents = null;
 
+document.addEventListener("DOMContentLoaded", function(event) { 
+    if( document.getElementById("mapping_panel") )
+    {
+        AddInputActionEvents();
+    }
+});
+
 function AddInputActionEvents()
 {
     fileInput = document.getElementById("contacts_file");
@@ -11,10 +18,6 @@ function AddInputActionEvents()
     document.getElementById("mapping_panel").style.display = "none";
     document.getElementById("btn_upload_file").style.display = "none";
 }
-
-document.addEventListener("DOMContentLoaded", function(event) { 
-    AddInputActionEvents();
-});
 
 const readFile = function () {
     var reader = new FileReader();
