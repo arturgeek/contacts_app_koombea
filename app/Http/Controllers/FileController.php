@@ -39,7 +39,16 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        return view("periods.create", [ "action" => "create" ]);
+        $path = $request->file('contacts_file')->store('files');
+
+        $file = new File;
+        $file->user_id = Auth::id();
+        $file->file_name = $path;
+        $file->mapping = $request->get("mapping");
+        $file->state = "wait";
+        $file->save();
+
+        return redirect("/files");
     }
 
     /**

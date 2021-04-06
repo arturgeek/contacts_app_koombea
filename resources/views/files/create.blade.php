@@ -4,7 +4,7 @@
             {{ __('Create New File') }}
         </h2>
     </x-slot>
-    <form method="POST" action="/files">
+    <form method="POST" action="/files" enctype="multipart/form-data">
         @csrf
         <div class="mb-4" id="file_panel">
             <h2>
@@ -22,6 +22,7 @@
                 Please assign the headers of the file with the Customer Fields
             </p>
         </div>
+        <input type="text" id="mapping" name="mapping" />
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 mt-2 px-4 roundedy" id="btn_upload_file">
             Upload File
         </button>

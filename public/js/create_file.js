@@ -89,7 +89,7 @@ const validateFile = function(){
     console.log( required.length == filtered.length, required.length, filtered );
     if( required.length == filtered.length )
     {
-        document.getElementById("file_mapping").value = JSON.stringify(map);
+        document.getElementById("mapping").value = JSON.stringify(map);
         document.getElementById("btn_upload_file").style.display = "block";
     }
 };
