@@ -85,8 +85,11 @@ const validateFile = function(){
     {
         let file_header_name = map_rows[i].children[0].value;
         let file_header_field = map_rows[i].children[1].value;
-        selected_fields.push(file_header_field);
-        map[file_header_field] = file_header_name;
+        if(file_header_field != "na")
+        {
+            selected_fields.push(file_header_field);
+            map[file_header_field] = i;
+        }
     }
     let filtered = required.filter(value => selected_fields.includes(value));
     console.log( required.length == filtered.length, required.length, filtered );
