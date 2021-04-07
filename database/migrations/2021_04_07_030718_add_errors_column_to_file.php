@@ -13,8 +13,8 @@ class AddErrorsColumnToFile extends Migration
      */
     public function up()
     {
-        Schema::table('file', function (Blueprint $table) {
-            $table->text('errors');
+        Schema::table('files', function (Blueprint $table) {
+            $table->text('errors')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddErrorsColumnToFile extends Migration
      */
     public function down()
     {
-        Schema::table('file', function (Blueprint $table) {
-            //
+        Schema::table('files', function (Blueprint $table) {
+            $table->dropColumn(['errors']);
         });
     }
 }
