@@ -56,6 +56,9 @@ class ProcessContactFiles extends Command
             $file_headers = explode(";", $file_headers);
             $mapping = json_decode($mapping, JSON_UNESCAPED_UNICODE);
 
+            File::where("id", $file->id)->update(["state" => "Processing"]);
+            $errors_in_file = [];
+            $completed_rows = 0;
             foreach($file_contents as $index => $row)
             {
                 if($index == 0 || empty($row)) continue;
@@ -76,13 +79,22 @@ class ProcessContactFiles extends Command
                     $contact["user_id"] = $user_id;
 
                     $this->createContact($contact);
+                    $completed_rows++;
                 }
                 else
                 {
-                    echo $contact_is_valid;
+                    $errors_in_file[] = $contact_is_valid;
                 }
                 echo PHP_EOL;
             }
+
+            $new_state = "Finished";
+            if( $completed_rows == 0 )
+            {
+                $new_state = "Fail";
+            }
+            $errors_in_file = json_encode($errors_in_file, JSON_UNESCAPED_UNICODE);
+            File::where("id", $file->id)->update(["state" => $new_state, "errors" => $errors_in_file]);
 
             echo PHP_EOL;
         }
