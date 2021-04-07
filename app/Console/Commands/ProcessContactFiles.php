@@ -43,10 +43,11 @@ class ProcessContactFiles extends Command
     {
         //DB::table('files')->where("state", "wait")->update( ["state" => "complete"] );
         $pending_files = File::where("state", "wait")->get();
-
+        Contact::truncate();
         foreach($pending_files as $file)
         {
             $file_name = $file->file_name;
+            $user_id = $file->user_id;
             $mapping = $file->mapping;
             $file_contents = Storage::get($file_name);
 
@@ -55,7 +56,6 @@ class ProcessContactFiles extends Command
             $file_headers = explode(";", $file_headers);
             $mapping = json_decode($mapping, JSON_UNESCAPED_UNICODE);
 
-            Contact::truncate();
             foreach($file_contents as $index => $row)
             {
                 if($index == 0 || empty($row)) continue;
@@ -73,6 +73,7 @@ class ProcessContactFiles extends Command
                     $contact["cc_type"] = $this->getCreditCardType($contact["cc_num"]);
                     $contact["cc_last"] = substr($contact["cc_num"], -4);
                     $contact["cc_num"] = $this->encryptCreditCard($contact["cc_num"]);
+                    $contact["user_id"] = $user_id;
 
                     $this->createContact($contact);
                 }
@@ -90,7 +91,6 @@ class ProcessContactFiles extends Command
 
     private function createContact( $contact_data )
     {
-        print_r($contact_data);
         $contact = new Contact;
         $contact->name = $contact_data["name"];
         $contact->date_of_birth = $contact_data["date_of_birth"];
@@ -100,7 +100,10 @@ class ProcessContactFiles extends Command
         $contact->email = $contact_data["email"];
         $contact->cc_type = $contact_data["cc_type"];
         $contact->cc_last = $contact_data["cc_last"];
-        $contact->save();
+        $contact->user_id = $contact_data["user_id"];
+        $result = $contact->save();
+        print_r($contact_data);
+        echo $result;
     }
 
     private function validateContact( $contact , $row_number )
