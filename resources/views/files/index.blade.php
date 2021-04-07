@@ -10,7 +10,7 @@
     </a>
     <br/>
     @if (count($files) === 0)
-    <h2>No files uploaded!</h2>
+    <h2 class="py-3">No files uploaded!</h2>
     @else
     <table class="rounded-t-lg m-5 w-full mx-auto bg-gray-200 text-gray-800">
         <tr class="text-left border-b-2 border-gray-300">
