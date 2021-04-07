@@ -22,7 +22,7 @@
                 Please assign the headers of the file with the Customer Fields
             </p>
         </div>
-        <input type="text" id="mapping" name="mapping" />
+        <input type="hidden" id="mapping" name="mapping" />
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 mt-2 px-4 roundedy" id="btn_upload_file">
             Upload File
         </button>
