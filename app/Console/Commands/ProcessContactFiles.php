@@ -129,6 +129,12 @@ class ProcessContactFiles extends Command
             return "Email ".$email." has an invalid format - row(".$row_number.")";
         }
 
+        $address = trim($contact["address"]);
+        if ( empty($address) ) 
+        {
+            return "Address is empty - row(".$row_number.")";
+        }
+
         return "";
     }
 
