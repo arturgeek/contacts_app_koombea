@@ -27,4 +27,7 @@
             Upload File
         </button>
     </form>
+    <div>
+        You can download a model to this file <a href="{{ asset('contacts_file_model.csv') }}">here</a>
+    </div>
 </x-app-layout>
