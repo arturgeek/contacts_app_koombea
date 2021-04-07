@@ -18,11 +18,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get("/files", [FileController::class, "index"])->middleware('auth');
+Route::get("/files", [FileController::class, "index"])->middleware('auth')->name('files');
 Route::get("/files/create", [FileController::class, "create"])->middleware('auth');
 Route::post("/files", [FileController::class, "store"])->middleware('auth');
 
-Route::get("/contacts", [ContactsController::class, "index"])->middleware('auth');;
+Route::get("/contacts", [ContactsController::class, "index"])->middleware('auth')->name('contacts');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
