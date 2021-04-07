@@ -4,7 +4,7 @@
             {{ __('Your Contacts') }}
         </h2>
     </x-slot>
-    @if (count($files) === 0)
+    @if (count($contacts) === 0)
     <h2 class="py-3">You dont have contacts right now</h2>
     @else
     <table class="rounded-t-lg m-5 w-full mx-auto bg-gray-200 text-gray-800">
@@ -18,7 +18,7 @@
             <th class="px-4 py-3">Last numbers</th>
         </tr>
         @foreach ($contacts as $contact)
-        <tr cla1ss="bg-gray-100 border-b border-gray-200">
+        <tr class="bg-gray-100 border-b border-gray-200">
             <td class="px-4 py-3">{{ $contact->name }}</td>
             <td class="px-4 py-3">{{ $contact->date_of_birth }}</td>
             <td class="px-4 py-3">{{ $contact->phone }}</td>

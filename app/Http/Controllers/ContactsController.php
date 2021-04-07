@@ -11,7 +11,7 @@ class ContactsController extends Controller
     public function index()
     {
         return view("contacts.index", [
-            "files" => Contact::where("user_id", Auth::id())->get()
+            "contacts" => Contact::where("user_id", Auth::id())->get()
         ]);
     }
 }
