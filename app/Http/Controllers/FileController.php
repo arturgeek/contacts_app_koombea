@@ -17,7 +17,7 @@ class FileController extends Controller
     public function index()
     {
         return view("files.index", [
-            "files" => File::all()
+            "files" => File::where("user_id", Auth::id())->get()
         ]);
     }
 
